@@ -2,7 +2,7 @@ class Stack(object):
     stack_list = []
 
     def __init__(self, *args):
-        self.stack_list.extend(args)
+        self.push(args)
         pass
 
     def isEmpty(self):
@@ -12,9 +12,10 @@ class Stack(object):
         else:
             return True
 
-    def push(self, a):
+    def push(self, *args):
         """добавляет новый элемент на вершину стека. Метод ничего не возвращает."""
-        self.stack_list.append(a)
+        for a in list(args):
+            self.stack_list.extend(a)
 
     def pop(self):
         """удаляет верхний элемент стека. Стек изменяется. Метод возвращает верхний элемент стека."""
@@ -34,15 +35,33 @@ class Stack(object):
 
 
 if __name__ == '__main__':
-    print('Начали')
-    st = Stack(1, 2, 4)
-    print(st.isEmpty())
-    st.print_all()
-    st.push(9)
-    st.print_all()
-    print(st.pop())
-    st.print_all()
-    print(st.peek())
-    st.print_all()
-    print(st.size())
-    st.print_all()
+    # print('Начали')
+    # st = Stack()
+    # print(st.isEmpty())
+    # st.print_all()
+    # st.push(9)
+    # st.print_all()
+    # print(st.pop())
+    # st.print_all()
+    # print(st.peek())
+    # st.print_all()
+    # print(st.size())
+    # st.print_all()
+
+
+    st = Stack()
+    st.push(list(input("Введите строку со скобками: ")))
+
+    bracket_dict = {"(": 0, ")": 0, "{": 0, "}": 0, "[": 0, "]": 0}
+    bracket_dict_keys = bracket_dict.keys()
+    while not st.isEmpty():
+        temp = st.pop()
+        if temp in bracket_dict_keys:
+            bracket_dict.update({temp: bracket_dict[temp]+1})
+    if (bracket_dict["("] - bracket_dict[")"] +
+        bracket_dict["{"] - bracket_dict["}"] +
+        bracket_dict["["] - bracket_dict["]"]):
+        print("Несбалансированно")
+    else:
+        print("Сбалансированно")
+
