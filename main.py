@@ -51,16 +51,39 @@ if __name__ == '__main__':
 
     st = Stack()
     st.push(list(input("Введите строку со скобками: ")))
+    round_bracket_counter = 0
+    square_bracket_counter = 0
+    curly_bracket_counter = 0
 
-    bracket_dict = {"(": 0, ")": 0, "{": 0, "}": 0, "[": 0, "]": 0}
-    bracket_dict_keys = bracket_dict.keys()
     while not st.isEmpty():
         temp = st.pop()
-        if temp in bracket_dict_keys:
-            bracket_dict.update({temp: bracket_dict[temp]+1})
-    if (bracket_dict["("] - bracket_dict[")"] +
-        bracket_dict["{"] - bracket_dict["}"] +
-        bracket_dict["["] - bracket_dict["]"]):
+        print(temp)
+        if temp == "(":
+            round_bracket_counter += 1
+        if temp == ")":
+            round_bracket_counter -= 1
+            if round_bracket_counter > 0:
+                break
+        if temp == "[":
+            square_bracket_counter += 1
+        if temp == "]":
+            square_bracket_counter -= 1
+            if square_bracket_counter > 0:
+                break
+        if temp == "{":
+            curly_bracket_counter += 1
+        if temp == "}":
+            curly_bracket_counter -= 1
+            if curly_bracket_counter > 0:
+                break
+        print(round_bracket_counter)
+        print(square_bracket_counter)
+        print(curly_bracket_counter)
+        print()
+    print(round_bracket_counter)
+    print(square_bracket_counter)
+    print(curly_bracket_counter)
+    if abs(round_bracket_counter) + abs(square_bracket_counter) + abs(curly_bracket_counter):
         print("Несбалансированно")
     else:
         print("Сбалансированно")
