@@ -33,6 +33,36 @@ class Stack(object):
         print(self.stack_list)
         pass
 
+    def isBalanced(self):
+        round_bracket_counter = 0
+        square_bracket_counter = 0
+        curly_bracket_counter = 0
+
+        while not self.isEmpty():
+            temp = self.pop()
+            if temp == "(":
+                round_bracket_counter += 1
+            if temp == ")":
+                round_bracket_counter -= 1
+                if round_bracket_counter > 0:
+                    break
+            if temp == "[":
+                square_bracket_counter += 1
+            if temp == "]":
+                square_bracket_counter -= 1
+                if square_bracket_counter > 0:
+                    break
+            if temp == "{":
+                curly_bracket_counter += 1
+            if temp == "}":
+                curly_bracket_counter -= 1
+                if curly_bracket_counter > 0:
+                    break
+        if abs(round_bracket_counter) + abs(square_bracket_counter) + abs(curly_bracket_counter):
+            return "Несбалансированно"
+        else:
+            return "Сбалансированно"
+
 
 if __name__ == '__main__':
     # print('Начали')
@@ -51,40 +81,6 @@ if __name__ == '__main__':
 
     st = Stack()
     st.push(list(input("Введите строку со скобками: ")))
-    round_bracket_counter = 0
-    square_bracket_counter = 0
-    curly_bracket_counter = 0
+    print(st.isBalanced())
 
-    while not st.isEmpty():
-        temp = st.pop()
-        print(temp)
-        if temp == "(":
-            round_bracket_counter += 1
-        if temp == ")":
-            round_bracket_counter -= 1
-            if round_bracket_counter > 0:
-                break
-        if temp == "[":
-            square_bracket_counter += 1
-        if temp == "]":
-            square_bracket_counter -= 1
-            if square_bracket_counter > 0:
-                break
-        if temp == "{":
-            curly_bracket_counter += 1
-        if temp == "}":
-            curly_bracket_counter -= 1
-            if curly_bracket_counter > 0:
-                break
-        print(round_bracket_counter)
-        print(square_bracket_counter)
-        print(curly_bracket_counter)
-        print()
-    print(round_bracket_counter)
-    print(square_bracket_counter)
-    print(curly_bracket_counter)
-    if abs(round_bracket_counter) + abs(square_bracket_counter) + abs(curly_bracket_counter):
-        print("Несбалансированно")
-    else:
-        print("Сбалансированно")
 
